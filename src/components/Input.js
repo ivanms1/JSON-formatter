@@ -4,6 +4,7 @@ const Input = ({ onChange }) => (
 	<div className="text-box">
 		<h4>Input</h4>
 		<textarea onChange={onChange}
+					  className="input"
 					  name="input"
 					  id="texarea"
 					  cols="50"

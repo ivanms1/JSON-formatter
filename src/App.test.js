@@ -1,9 +1,34 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { mount } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import App from './App.js'
+
+describe('Output', function() {
+  it('should output error if input is not JSON', function() {
+  	const app = mount(<App/>);
+
+  	const input = app.find('.input');
+  	const output = app.find('.output');
+
+  	input.instance().value = 'not valid JSON';
+  	input.simulate('change');
+  	
+  	expect(output.render().text()).toBe('Please insert valid JSON');
+  	
+  });
+
+  it('should output JSON if input is correct', function() {
+  	const app = mount(<App/>);
+
+  	const input = app.find('.input');
+  	const output = app.find('.output');
+
+  	input.instance().value = '{}';
+  	input.simulate('change');
+
+  	expect(output.text()).not.toBe('Please insert valid JSON')
+  	//expect(output.render().text()).not.toBe('Please insert valid JSON')
+  	
+  });
+
 });

@@ -4,6 +4,7 @@ const Output = ({ output }) => (
 	<div className="text-box">
 		<h4>Output</h4>
 		<textarea readOnly
+				  className="output"
 				  value={output}
 				  name="output"
 				  cols="50"
