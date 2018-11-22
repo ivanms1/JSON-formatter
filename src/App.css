@@ -1,5 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  background-image: url('./images/bg.jpg');
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .app-container {

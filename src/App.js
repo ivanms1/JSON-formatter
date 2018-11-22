@@ -8,7 +8,8 @@ class App extends Component {
 
   state = {
     input: "",
-    output: ""
+    output: "",
+    isJson: true
   }
 
   onChange = this.onChange.bind(this);
@@ -21,32 +22,41 @@ class App extends Component {
 
   handleOutput(input) {
     let newArray = [];
-    let parsedInput = Object.values(JSON.parse(input));
 
-    parsedInput.forEach(input => {
-      input.forEach(entry => {
-        if(entry.parent_id === null) newArray.push(entry);
-        else {
-          newArray.find(parent => {
-            if(parent.id === entry.parent_id) return parent.children.push(entry)
-              else {
-                parent.children.find(val => {
-                  if(val.id === entry.parent_id) return val.children.push(entry)
-                })
-              }
-          })
-        }
+    try {
+
+
+      let parsedInput = Object.values(JSON.parse(input));
+
+      parsedInput.forEach(input => {
+        input.forEach(entry => {
+          if(entry.parent_id === null || entry.parent_id === undefined) newArray.push(entry);
+          else {
+            newArray.find(parent => {
+              if(parent.id === entry.parent_id) return parent.children.push(entry)
+                else {
+                  parent.children.find(val => {
+                    if(val.id === entry.parent_id) return val.children.push(entry)
+                  })
+                }
+            })
+          }
+        })
       })
-    })
 
-    this.setState({ output: JSON.stringify(newArray, null, 2) });
+      this.setState({ output: JSON.stringify(newArray, null, 2), isJson: true });
+    } catch (e) {
+
+      this.setState({ isJson: false, output: "Please insert valid JSON" })
+
+    }
   }
 
   render() {
     const { output } = this.state;
     return (
       <div className="App">
-        <h2>JSON Cleaner</h2>
+        <h2>JSON Organizer</h2>
         <div className="app-container">
           <Input onChange={this.onChange}/>
           <Output output={output}/>
