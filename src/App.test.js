@@ -27,7 +27,6 @@ describe('Output', function() {
   	input.simulate('change');
 
   	expect(output.text()).not.toBe('Please insert valid JSON')
-  	//expect(output.render().text()).not.toBe('Please insert valid JSON')
   	
   });
 
